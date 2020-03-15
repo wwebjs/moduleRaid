@@ -1,3 +1,5 @@
+**NOTE** This package was published to @pedroslopez/moduleraid simply because of some changes that were made that have not been included in an official release of the library. You should refer to the original repository to report issues and pull requests.
+
 <div align='center'>
   <img width=200px src='.github/logo.png?raw=true'>
 

@@ -1,6 +1,6 @@
 {
-  "name": "moduleraid",
-  "version": "4.0.1",
+  "name": "@pedroslopez/moduleraid",
+  "version": "4.1.0",
   "description": "Get modules from webpackJsonp",
   "main": "moduleraid.js",
   "scripts": {
