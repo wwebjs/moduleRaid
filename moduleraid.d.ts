@@ -4,6 +4,5 @@ declare module 'moduleraid' {
     constructors: any[];
     get: (id: string) => any;
     findModule: (query: string) => any;
-    findFunction: (query: string) => any[];
   };
 }
