@@ -1,4 +1,4 @@
-**NOTE** This package was published to @pedroslopez/moduleraid simply because of some changes that were made that have not been included in an official release of the library. You should refer to the original repository to report issues and pull requests.
+**NOTE** This package was modified from pixeldesu's original moduleRaid for compatibility with webpack v5 used in WhatsApp Web. No support will be given outside of anything strictly necessary to extract modules in WhatsApp Web.
 
 <div align='center'>
   <img width=200px src='.github/logo.png?raw=true'>

@@ -1,7 +1,7 @@
 {
   "name": "@pedroslopez/moduleraid",
-  "version": "4.1.0",
-  "description": "Get modules from webpackJsonp",
+  "version": "5.0.0",
+  "description": "Get modules from webpack v5",
   "main": "moduleraid.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,13 +18,12 @@
     "extraction"
   ],
   "files": [
-    "moduleraid.js",
-    "moduleraid.min.js"
+    "moduleraid.js"
   ],
-  "author": "Andreas Nedbal <andy@pixelde.su>",
+  "author": "Andreas Nedbal <andy@pixelde.su>, Pedro Lopez <pedroslopez@me.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pixeldesu/moduleRaid/issues"
   },
-  "homepage": "https://github.com/pixeldesu/moduleRaid#readme"
+  "homepage": "https://github.com/@pedroslopez/moduleRaid#readme"
 }
