@@ -11,7 +11,7 @@ const moduleRaid = function () {
   moduleRaid.mObj = {};
 
   fillModuleArray = function() {
-    webpackChunkbuild.push([
+    (webpackChunkbuild || webpackChunkwhatsapp_web_client).push([
       [moduleRaid.mID], {}, function(e) {
         Object.keys(e.m).forEach(function(mod) {
           moduleRaid.mObj[mod] = e(mod);
