@@ -1,6 +1,6 @@
 {
   "name": "@pedroslopez/moduleraid",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Get modules from webpack v5",
   "main": "moduleraid.js",
   "scripts": {
