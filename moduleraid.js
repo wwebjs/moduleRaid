@@ -1,4 +1,5 @@
-/* moduleRaid v6
+/*
+* moduleRaid v6
  * https://github.com/wwebjs/moduleRaid
  *
  * Copyright pixeldesu, pedroslopez, purpshell and other contributors
@@ -10,17 +11,17 @@ const moduleRaid = function () {
   moduleRaid.mID  = Math.random().toString(36).substring(7);
   moduleRaid.mObj = {};
 
-  const isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) > 3000;
+  const isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) >= 3000;
 
   fillModuleArray = function() {
     if (isComet) {
-      return moduleRaid.mObj = Object.values(require("__debug").modulesMap)
-        .filter(module => !!module?.exports && Object.keys(module?.exports).length > 0)
-        .filter(module => !module.name.includes("react") && !module.name.startsWith('use'))
-        .map((module) => ({name: module, exports: module.exports}))
-        .reduce((acc, curr) => { 
-          return {...acc, [curr.name]: Object.keys(curr.exports)}
-        }, {})
+      // inspired by a prototype smashah sent me
+      return moduleRaid.mObj = Object.fromEntries(
+          Object.values(require("__debug").modulesMap)
+            .filter(module => !!module?.exports)
+            .filter(module => !module?.id?.includes("react") && !module?.id?.startsWith('use'))
+            .map((module) => [module.id, module.exports])
+      )
     }
 
     (window.webpackChunkbuild || window.webpackChunkwhatsapp_web_client).push([
