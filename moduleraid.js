@@ -1,16 +1,28 @@
-/* moduleRaid v5
- * https://github.com/@pedroslopez/moduleRaid
+/* moduleRaid v6
+ * https://github.com/wwebjs/moduleRaid
  *
- * Copyright pixeldesu, pedroslopez and other contributors
+ * Copyright pixeldesu, pedroslopez, purpshell and other contributors
  * Licensed under the MIT License
- * https://github.com/pedroslopez/moduleRaid/blob/master/LICENSE
+ * https://github.com/wwebjs/moduleRaid/blob/master/LICENSE
  */
 
 const moduleRaid = function () {
   moduleRaid.mID  = Math.random().toString(36).substring(7);
   moduleRaid.mObj = {};
 
+  const isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) > 3000;
+
   fillModuleArray = function() {
+    if (isComet) {
+      return moduleRaid.mObj = Object.values(require("__debug").modulesMap)
+        .filter(module => !!module?.exports && Object.keys(module?.exports).length > 0)
+        .filter(module => !module.name.includes("react") && !module.name.startsWith('use'))
+        .map((module) => ({name: module, exports: module.exports}))
+        .reduce((acc, curr) => { 
+          return {...acc, [curr.name]: Object.keys(curr.exports)}
+        }, {})
+    }
+
     (window.webpackChunkbuild || window.webpackChunkwhatsapp_web_client).push([
       [moduleRaid.mID], {}, function(e) {
         Object.keys(e.m).forEach(function(mod) {
@@ -19,7 +31,7 @@ const moduleRaid = function () {
       }
     ]);
   }
-
+  
   fillModuleArray();
 
   get = function get (id) {
@@ -51,7 +63,6 @@ const moduleRaid = function () {
         } else {
           throw new TypeError('findModule can only find via string and function, ' + (typeof query) + ' was passed');
         }
-        
       }
     })
 
