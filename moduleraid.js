@@ -15,14 +15,15 @@ const moduleRaid = function () {
 
   fillModuleArray = function() {
     if (isComet) {
-      // inspired by a prototype smashah sent me
-      return moduleRaid.mObj = Object.fromEntries(
-          Object.values(require("__debug").modulesMap)
-            .filter(module => !!module?.exports)
-            .filter(module => !module?.id?.includes("react") && !module?.id?.startsWith('use'))
-            .map((module) => [module.id, module.exports])
-      )
-    }
+      const moduleKeys = Object.keys(require("__debug").modulesMap);
+      for (const moduleKey of moduleKeys) {
+        const module = require(moduleKey);
+        if (module) {
+          moduleRaid.mObj[moduleKey] = module;
+        } 
+      };
+      return;
+    };
 
     (window.webpackChunkbuild || window.webpackChunkwhatsapp_web_client).push([
       [moduleRaid.mID], {}, function(e) {
