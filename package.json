@@ -1,7 +1,7 @@
 {
   "name": "@pedroslopez/moduleraid",
-  "version": "5.0.2",
-  "description": "Get modules from webpack v5",
+  "version": "6.0.2",
+  "description": "Get modules from webpack v5/comet",
   "main": "moduleraid.js",
   "scripts": {
     "test": "mocha tests"
