@@ -11,14 +11,16 @@ const moduleRaid = function () {
   moduleRaid.mID  = Math.random().toString(36).substring(7);
   moduleRaid.mObj = {};
 
-  const isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) >= 3000;
+  moduleRaid.isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) >= 3000;
 
   fillModuleArray = function() {
-    if (isComet) {
+    if (moduleRaid.isComet) {
       const moduleKeys = Object.keys(require("__debug").modulesMap);
       for (const moduleKey of moduleKeys) {
         const module = require(moduleKey);
         if (module) {
+          if(!module.default) 
+            module.default = module;
           moduleRaid.mObj[moduleKey] = module;
         } 
       };
