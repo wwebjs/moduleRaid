@@ -15,17 +15,27 @@ const moduleRaid = function () {
 
   fillModuleArray = function() {
     if (moduleRaid.isComet) {
-      const moduleKeys = Object.keys(require("__debug").modulesMap);
-      for (const moduleKey of moduleKeys) {
-        const module = require(moduleKey);
-        if (module) {
-          if(!module.default) 
-            module.default = module;
-          moduleRaid.mObj[moduleKey] = module;
-        } 
-      };
+          window.ErrorGuard.skipGuardGlobal(true);
+          
+          const moduleKeys = Object.keys(require("__debug").modulesMap);
+          for (const moduleKey of moduleKeys) {
+              try {
+                  const _module = require(moduleKey);
+                  if (_module) {
+                      let module = { ..._module };
+                      if (!module.hasOwnProperty('default')) {
+                          module.default = module;
+                      }
+                      
+                      moduleRaid.mObj[moduleKey] = module;
+                  }
+              }
+              catch (error) {}
+          };
+
+          window.ErrorGuard.skipGuardGlobal(false);
       return;
-    };
+    }
 
     (window.webpackChunkbuild || window.webpackChunkwhatsapp_web_client).push([
       [moduleRaid.mID], {}, function(e) {
