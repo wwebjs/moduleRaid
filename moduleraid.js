@@ -11,19 +11,26 @@ const moduleRaid = function () {
   moduleRaid.mID  = Math.random().toString(36).substring(7);
   moduleRaid.mObj = {};
 
-  const isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) >= 3000;
+  moduleRaid.isComet = parseInt(window.Debug?.VERSION?.split(".")?.[1]) >= 3000;
 
   fillModuleArray = function() {
-    if (isComet) {
-      const moduleKeys = Object.keys(require("__debug").modulesMap);
-      for (const moduleKey of moduleKeys) {
-        const module = require(moduleKey);
-        if (module) {
-          moduleRaid.mObj[moduleKey] = module;
-        } 
-      };
+    if (moduleRaid.isComet) {
+          window.ErrorGuard.skipGuardGlobal(true);
+
+          const moduleKeys = Object.keys(require("__debug").modulesMap);
+          for (const moduleKey of moduleKeys) {
+              try {
+                  const module = require(moduleKey);
+                  if (module) {
+                      moduleRaid.mObj[moduleKey] = module;
+                  }
+              }
+              catch (error) {}
+          };
+
+          window.ErrorGuard.skipGuardGlobal(false);
       return;
-    };
+    }
 
     (window.webpackChunkbuild || window.webpackChunkwhatsapp_web_client).push([
       [moduleRaid.mID], {}, function(e) {
